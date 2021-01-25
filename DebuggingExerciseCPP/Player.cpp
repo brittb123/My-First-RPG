@@ -1,4 +1,5 @@
-
+#include "Player.h"
+#include "Character.h"
 
 float Player::takeDamage(float damage)
 {
@@ -20,4 +21,8 @@ float Player::getDamage()
 float Player::getDefense()
 {
     return Character::getDefense() + m_shield.getStatusBoost();
+}
+
+void Player::equipWeapon(Item item)
+{
 }

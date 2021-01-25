@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Enemy.h"
+#include "Character.h"
 #include <iostream>
 
 /// <summary>
@@ -10,7 +12,7 @@
 /// <returns>The decision made by the player.</returns>
 int printOptions(const char* context, const char* option1, const char* option2)
 {
-	
+
 	int input = -1;
 
 	//Loops until the player selects an existing option
@@ -34,7 +36,7 @@ int printOptions(const char* context, const char* option1, const char* option2)
 			system("cls");
 		}
 	}
-	
+
 	//Return the player's choice.
 	return input;
 }
@@ -66,7 +68,7 @@ void printCharacterStats(Character* character)
 int startPlayerBattle(Player* player, Character* enemy)
 {
 	//Loop while both the enemy and player are alive.
-	while (player->getHealth > 0 && enemy->getHealth > 0)
+	while (player->getHealth() > 0 && enemy->getHealth() > 0)
 	{
 		system("cls");
 
@@ -75,7 +77,7 @@ int startPlayerBattle(Player* player, Character* enemy)
 		std::cout << std::endl;
 		printCharacterStats(enemy);
 		std::cout << std::endl;
-		
+
 		//Gets player action
 		int choice = printOptions("Your Turn", "Attack", "Run");
 
@@ -86,7 +88,8 @@ int startPlayerBattle(Player* player, Character* enemy)
 			return 2;
 
 		//Enemy attack.
-		std::cout << enemy->getName << " did: " << enemy->attack(player) << " damage!" << std::endl;
+		std::cout << enemy->getName() << " did: " << enemy->attack(player) << " damage!" << std::endl;
+
 		system("pause");
 	}
 
@@ -103,16 +106,18 @@ int main()
 	//Initialize new player.
 	Player* player = new Player(playerName, 100, 10, 5);
 
-	//Gets player weapon choice and equips the choosen weapon.
-	int choice = printOptions("Pick an Item: ", "Sword", "Shield");
-	if (choice = 1)
-		player.equipWeapon(Item(10));
-	else if (choice == 2)
-		player.equipShield(Item(10));
-
 	//Initialize new enemy.
 	Enemy* enemy = new Enemy("Monster", 50, 10, 5);
-	
+
+	//Gets player weapon choice and equips the choosen weapon.
+	int choice = printOptions("Pick an Item: ", "Sword", "Shield");
+	if (choice == 1)
+		player->equipWeapon(Item(10));
+	else if (choice == 2)
+		player->equipShield(Item(10));
+
+
+
 	//Start battle with enemy and player and record the result.
 	int result = startPlayerBattle(player, enemy);
 

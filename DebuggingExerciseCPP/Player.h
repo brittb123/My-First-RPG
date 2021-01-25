@@ -3,12 +3,12 @@
 #include "Character.h"
 
 class Player :
-     Character
+    public Character
 {
 public:
     Player() : Character() {}
     Player(const char* name, float health, float damage, float defense) :
-        Character(name, health, damage, defense);
+        Character(name, health, damage, defense) {};
 
     /// <summary>
     /// Adds the given item's stat boost to this player's total damage.

@@ -6,8 +6,10 @@ class Enemy :
 {
 public:
     Enemy() : Character() {}
-    Enemy(const char* name, float health, float damage, float defense);
-    
+
+    Enemy(const char* name, float health, float damage, float defense) :
+        Character(name, health, damage, defense) {};
+
     //Inheritered via Character
     /// <summary>
     /// Attacks the given character using a random damage boost.
@@ -16,4 +18,3 @@ public:
     /// <returns>The total damage dealt.</returns>
     virtual float attack(Character* other);
 };
-
